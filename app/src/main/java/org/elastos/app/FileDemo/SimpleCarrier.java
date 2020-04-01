@@ -108,15 +108,15 @@ class SimpleCarrier {
 		CarrierHandler carrierHandler = new CarrierHandler();
 
 		try {
-			Carrier.initializeInstance(options, carrierHandler);
-			sCarrier = Carrier.getInstance();
+			sCarrier = Carrier.createInstance(options,carrierHandler);
+
 			sCarrier.start(0);
 			Log.i(TAG, "Carrier node is ready now");
 
 			//Initialize fileTransfer instance.
 			FileTransferManagerHandler fileTransferManagerHandler = new FileTransferManagerHandler();
-			Manager.initializeInstance(sCarrier, fileTransferManagerHandler);
-			sFileTransferManager = Manager.getInstance();
+
+			sFileTransferManager = Manager.createInstance(sCarrier, fileTransferManagerHandler);
 		}
 		catch (CarrierException /*| InterruptedException*/ e) {
 			e.printStackTrace();
